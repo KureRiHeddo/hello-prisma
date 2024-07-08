@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Devices {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  type              String
+  location          String
+  status            Boolean
+  create_at         DateTime
+  update_at         DateTime
+  Devices_Status    Devices_Status[]
+  Enegry_Usage_Data Enegry_Usage_Data[]
+}
+
+model Devices_Status {
+  id        Int      @id @default(autoincrement())
+  device    Devices  @relation(fields: [device_id], references: [id])
+  device_id Int
+  timestamp DateTime
+  status    Boolean
+}
+
+model Enegry_Usage_Data {
+  id           Int      @id @default(autoincrement())
+  device       Devices  @relation(fields: [device_id], references: [id])
+  device_id    Int
+  timestamp    DateTime
+  voltage      Float
+  current      Float
+  power        Float
+  energe       Float
+  frequency    Float
+  power_factor Float
+}

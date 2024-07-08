@@ -4,10 +4,8 @@
   - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
 
 */
--- DropTable
 DROP TABLE "User";
 
--- CreateTable
 CREATE TABLE "Device" (
     "device_id" SERIAL NOT NULL,
     "device_name" TEXT NOT NULL,
@@ -20,7 +18,6 @@ CREATE TABLE "Device" (
     CONSTRAINT "Device_pkey" PRIMARY KEY ("device_id")
 );
 
--- CreateTable
 CREATE TABLE "EnergyUsageData" (
     "data_id" SERIAL NOT NULL,
     "device_id" INTEGER NOT NULL,
@@ -35,7 +32,6 @@ CREATE TABLE "EnergyUsageData" (
     CONSTRAINT "EnergyUsageData_pkey" PRIMARY KEY ("data_id")
 );
 
--- CreateTable
 CREATE TABLE "DeviceStatus" (
     "status_id" SERIAL NOT NULL,
     "device_id" INTEGER NOT NULL,
@@ -45,8 +41,6 @@ CREATE TABLE "DeviceStatus" (
     CONSTRAINT "DeviceStatus_pkey" PRIMARY KEY ("status_id")
 );
 
--- AddForeignKey
 ALTER TABLE "EnergyUsageData" ADD CONSTRAINT "EnergyUsageData_device_id_fkey" FOREIGN KEY ("device_id") REFERENCES "Device"("device_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
--- AddForeignKey
 ALTER TABLE "DeviceStatus" ADD CONSTRAINT "DeviceStatus_device_id_fkey" FOREIGN KEY ("device_id") REFERENCES "Device"("device_id") ON DELETE RESTRICT ON UPDATE CASCADE;
